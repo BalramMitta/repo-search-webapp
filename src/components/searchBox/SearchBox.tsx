@@ -5,11 +5,12 @@ import { Repo } from "../../types/common";
 import SearchItem from "./SearchItem";
 import ResultLabel from "./ResultLabel";
 import AsyncWrapper from "../asyncWrapper/AsyncWrapper";
+import InfiniteScroll from "../infiniteScroll/InfiniteScroll";
 
 const SearchBox: React.FC = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-  const { searchTerm, repos, isLoading, error, recentSearches, onSearch } =
+  const { searchTerm, repos, isLoading, error, recentSearches, hasMore, fetchNextPage, onSearch } =
     useSearch();
   const { setSelectedRepo } = useSelectedRepo();
 
@@ -46,19 +47,24 @@ const SearchBox: React.FC = () => {
         <ul className="absolute w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-64 overflow-y-auto z-10">
           {searchTerm.length > 0 ? (
             <AsyncWrapper
-              isLoading={isLoading}
+              isLoading={isLoading && repos.length === 0}
               isEmpty={repos.length === 0}
               error={error}
             >
-              <>
-                {repos.slice(0, 8).map((repo) => (
+              <InfiniteScroll
+                data={repos}
+                hasMore={hasMore}
+                itemHeight={100}
+                itemsPerView={8}
+                fetchMoreData={fetchNextPage}
+                itemRenderer={(repo) => (
                   <SearchItem
                     key={repo.id}
                     repo={repo}
                     onSelect={handleSelectRepo}
                   />
-                ))}
-              </>
+                )}
+              />
             </AsyncWrapper>
           ) : (
             recentSearches.map((recent, index) => (

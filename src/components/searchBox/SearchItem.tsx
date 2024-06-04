@@ -13,7 +13,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ repo, onSelect }) => {
     onSelect(repo)
   };
 
-  return <ResultLabel label={repo.name} onSelect={handleSelect} />;
+  return <ResultLabel icon={repo.owner.avatar_url} label={repo.name} onSelect={handleSelect} />;
 };
 
 export default SearchItem;

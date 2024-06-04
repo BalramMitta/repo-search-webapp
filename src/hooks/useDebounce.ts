@@ -11,8 +11,6 @@ const useDebounce = <T extends (...args: any[]) => void>(callback: T, delay: num
       timeoutRef.current = setTimeout(() => {
         callback(...args);
       }, delay);
-
-      return () => timeoutRef.current && clearTimeout(timeoutRef.current)
     },
     [callback, delay]
   );

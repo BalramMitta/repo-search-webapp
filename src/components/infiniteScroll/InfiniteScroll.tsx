@@ -26,6 +26,10 @@ const InfiniteScroll = ({
 }: InfiniteScrollProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    setIsLoading(false);
+  },[data, hasMore])
+
   // Ref for the sentinel element
   const sentinelRef = useRef<HTMLDivElement>(null);
 

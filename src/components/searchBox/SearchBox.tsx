@@ -18,8 +18,8 @@ const SearchBox: React.FC = () => {
     onSearch(e.target.value);
   };
 
-  const toggleFocus = () => {
-    setIsSearchFocused((prevState) => !prevState);
+  const onSearchfocus = () => {
+    setIsSearchFocused(true);
   };
 
   const handleSelectRepo = useCallback(
@@ -39,8 +39,7 @@ const SearchBox: React.FC = () => {
         placeholder="Search for GitHub repositories..."
         value={searchTerm}
         onChange={handleInputChange}
-        onFocus={toggleFocus}
-        onBlur={toggleFocus}
+        onFocus={onSearchfocus}
         aria-label="Search for GitHub repositories"
       />
       {isSearchFocused && (

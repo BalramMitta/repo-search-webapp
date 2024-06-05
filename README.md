@@ -6,8 +6,8 @@ This is a simple React application that allows users to search for GitHub reposi
 
 - Search for GitHub repositories using keywords
 - View repository details such as name, description, and link
-- Scrollable list to view more than 8 repositories
-- Optimized rendering for up to 100 repositories without virtualization
+- Dynamic Scrollable list view
+- Optimized rendering of list 
 - Loading and error handling
 
 ## Technologies Used
